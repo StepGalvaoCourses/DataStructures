@@ -102,6 +102,9 @@ int main(){
             case 3:
                 exibirNota();
                 break;
+            case 0:
+                 printf("Saindo do programa....\n");
+                 break;
             default:
                 printf("Opção inválida \n");
         }
