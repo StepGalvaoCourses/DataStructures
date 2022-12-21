@@ -40,25 +40,72 @@ void aumentarVetor(){
     TAMANHO = novoTam;
 }
 
+
+void exibirNota(){
+    for (int i = 0; i < prox; i++){
+        printf("%f \n",notas[i]);
+    }
+}
+
+/**
+ * @brief Adiciona uma nota no vetor de notas e 
+ * atualiza a próxima posição vazia do vetor
+ * 
+ * @param nota : nota que será adicionada no vetor
+ */
 void adicionar(float nota){
     notas[prox] = nota;
     prox++;
+
+
+    /*
+    * Aumenta o tamanho do vetor notas que não houver
+    * mais posições vazias
+    */ 
+    if(prox==TAMANHO){
+        aumentarVetor();
+    }
 }
 
-void aumentarVetor(){
-    int *tmp = (float*) malloc(TAMANHO*sizeof(float));
-
-    for(int i=0; i<TAMANHO;i++){
-        tmp[i] = notas[i];
+float calcularMedia(){
+    float soma =0;
+    for(int i=0; i<prox;i++){
+        soma += notas[i];
     }
-
-    free(notas);
-
-    
+    return soma/(float )prox;
 }
 
 
 int main(){
-
-    
+    int entrada = 1;
+    float nota = 0;
+    float media = 0;
+    while (entrada != 0){
+        printf("**************************MENU******************************\n");
+        printf("1 - Adicionar nota \n");
+        printf("2 - Calcular media \n");
+        printf("3 - Exibir notas \n");
+        printf("0 - Sair \n");
+        printf("Escolha uma opção:");
+        scanf("%d",&entrada);
+        printf("**************************************************************\n");
+        switch (entrada){
+            case 1:
+                printf("Digite a nota:");
+                scanf("%f", &nota);
+                adicionar(nota);
+                break;
+            case 2:
+                media = calcularMedia();
+                printf("Media = %0.2f \n", media);
+                break;
+            case 3:
+                exibirNota();
+                break;
+            default:
+                printf("Opção inválida \n");
+        }
+        printf("***************************************************************\n");
+    }
+    printf("Fim do Programa");
 }
